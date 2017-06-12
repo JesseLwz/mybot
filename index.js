@@ -42,6 +42,15 @@ function _bot() {
     if (event.message.type == 'text') {
       var msg = event.message.text;
       var replyMsg = '';
+
+      if (msg.indexOf('地點') != -1)
+      {
+        pm.forEach(function(e, i) {
+            replyMsg += e[i] + ',';       
+        });
+      }
+      else{
+
       if (msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
           if (msg.indexOf(e[0]) != -1) {
@@ -55,7 +64,8 @@ function _bot() {
       if (replyMsg == '') {
         replyMsg = '不知道「'+msg+'」是什麼意思 :p';
       }
-
+    }
+    
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
       }).catch(function(error) {
