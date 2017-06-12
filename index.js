@@ -8,6 +8,7 @@ var bot = linebot({
 });
 
 var jp;
+var timer2;
 _japan();//抓日幣匯率
 
 bot.on('message', function (event) {
