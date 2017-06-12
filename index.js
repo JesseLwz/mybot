@@ -46,7 +46,7 @@ function _bot() {
       if (msg.indexOf('地點') != -1)
       {
         pm.forEach(function(e, i) {
-            replyMsg += e[i] + ',';       
+            replyMsg += e[0] + ',';       
         });
       }
       else{
