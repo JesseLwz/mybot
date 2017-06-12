@@ -12,10 +12,6 @@
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JesseLwz/mybot/issues"
-  },
-  "homepage": "https://github.com/JesseLwz/mybot#readme",
   "dependencies": {
     "express": "^4.15.3",
     "linebot": "^1.3.0"
