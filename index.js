@@ -1,8 +1,8 @@
 var linebot = require('linebot');
 var express = require('express');
 var getJSON = require('get-json');
-var request = require("request");
-var cheerio = require("cheerio");
+// var request = require("request");
+// var cheerio = require("cheerio");
 
 var bot = linebot({
     channelId: 1519666472,
@@ -17,7 +17,8 @@ var jp;
 
 _getJSON();
 
-_japan();
+//_japan();
+
 // bot.on('message', function (event) {
 //     if (event.message.type = 'text') {
 //         var msg = '你剛說 : ' + event.message.text  + 'BTW 日匯率:'+jp;
@@ -63,7 +64,7 @@ function _bot() {
           }
         });
         if (replyMsg == '') {
-          replyMsg = '請輸入正確的地點'+jp;
+          replyMsg = '請輸入正確的地點';
         }
       }
       if (replyMsg == '') {
