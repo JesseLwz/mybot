@@ -59,7 +59,29 @@ function _bot() {
         replyMsg = '目前日幣 '+jp;
       }
       else if(msg.indexOf('屁孩') != -1){
-        replyMsg = '叫屁喔!';
+        var maxNum = 10;  
+        var minNum = 0;  
+        var n = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+        switch(n)
+        {
+        case 1:
+          replyMsg = '在叫我嗎?';
+          break;
+        case 2:
+          replyMsg = '衝蝦小?';
+          break;
+        case 3:
+          replyMsg = '何事呼朕?';
+          break;
+        case 4:
+          replyMsg = '我很忙低';
+          break;
+        case 5:
+          replyMsg = '有話快說';
+          break;
+        default:
+          replyMsg = '叫屁喔!';
+        }
       }
       else {
         if (msg.indexOf('PM2.5') != -1 || msg.indexOf('pm2.5') != -1) {
