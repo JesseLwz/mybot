@@ -1,8 +1,8 @@
 var linebot = require('linebot');
 var express = require('express');
 var getJSON = require('get-json');
-// var request = require("request");
-// var cheerio = require("cheerio");
+var request = require("request");
+var cheerio = require("cheerio");
 
 var bot = linebot({
     channelId: 1519666472,
@@ -17,7 +17,8 @@ var jp;
 
 _getJSON();
 
-//_japan();
+_japan();
+
 
 // bot.on('message', function (event) {
 //     if (event.message.type = 'text') {
