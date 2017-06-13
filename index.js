@@ -5,9 +5,9 @@ var request = require("request");
 var cheerio = require("cheerio");
 
 var bot = linebot({
-    channelId: 1519666472,
-    channelSecret: 'a636c7b132faae8e4105aca68e9c6082',
-    channelAccessToken: 'SVXCMSo50NBIfXdzLpsVPDTNwJd9boEZSPM8bfRG/WPHZv9AEJE2W2mcx5OBOujFVv7gCLiLF0fkh2nKkmPKriRhYBZL7MJy4LYD3JNF6ZQarbTB7s9AM4i84Os7os9IeWupoFEA9a/YH6o0DSoZfgdB04t89/1O/w1cDnyilFU='
+  channelId: 1519666472,
+  channelSecret: 'a636c7b132faae8e4105aca68e9c6082',
+  channelAccessToken: 'SVXCMSo50NBIfXdzLpsVPDTNwJd9boEZSPM8bfRG/WPHZv9AEJE2W2mcx5OBOujFVv7gCLiLF0fkh2nKkmPKriRhYBZL7MJy4LYD3JNF6ZQarbTB7s9AM4i84Os7os9IeWupoFEA9a/YH6o0DSoZfgdB04t89/1O/w1cDnyilFU='
 });
 
 var timer;
@@ -40,42 +40,46 @@ app.post('/', linebotParser);
 
 //因為 express 預設走 port 3000，而 heroku 上預設卻不是，要透過下列程式轉換 TEST
 var server = app.listen(process.env.PORT || 8080, function () {
-    var port = server.address().port;
-    console.log("App now running on port", port);
+  var port = server.address().port;
+  console.log("App now running on port", port);
 });
 
 function _bot() {
-  bot.on('message', function(event) {
+  bot.on('message', function (event) {
     if (event.message.type == 'text') {
       var msg = event.message.text;
       var replyMsg = '';
 
-      if (msg.indexOf('地點') != -1)
-      {
-        pm.forEach(function(e, i) {
-            replyMsg += e[0] + ',';       
+      if (msg.indexOf('地點') != -1) {
+        pm.forEach(function (e, i) {
+          replyMsg += e[0] + ',';
         });
       }
-      else{
-
-      if (msg.indexOf('PM2.5') != -1 ||msg.indexOf('pm2.5') != -1) {
-        pm.forEach(function(e, i) {
-          if (msg.indexOf(e[0]) != -1) {
-            replyMsg = e[0] + '的 PM2.5 數值為 ' + e[1];
+      else if(msg.indexOf('日幣') != -1){
+        replyMsg = '目前日幣 '+jp;
+      }
+      else if(msg.indexOf('屁孩') != -1){
+        replyMsg = '叫屁喔!';
+      }
+      else {
+        if (msg.indexOf('PM2.5') != -1 || msg.indexOf('pm2.5') != -1) {
+          pm.forEach(function (e, i) {
+            if (msg.indexOf(e[0]) != -1) {
+              replyMsg = e[0] + '的 PM2.5 數值為 ' + e[1];
+            }
+          });
+          if (replyMsg == '') {
+            replyMsg = '請輸入正確的地點';
           }
-        });
+        }
         if (replyMsg == '') {
-          replyMsg = '請輸入正確的地點';
+          replyMsg = '不知道「' + msg + '」是什麼意思 :p';
         }
       }
-      if (replyMsg == '') {
-        replyMsg = '不知道「'+msg+'」是什麼意思 :p';
-      }
-    }
-    
-      event.reply(replyMsg).then(function(data) {
+
+      event.reply(replyMsg).then(function (data) {
         console.log(replyMsg);
-      }).catch(function(error) {
+      }).catch(function (error) {
         console.log('error');
       });
     }
@@ -84,8 +88,8 @@ function _bot() {
 
 function _getJSON() {
   clearTimeout(timer);
-  getJSON('http://opendata2.epa.gov.tw/AQX.json', function(error, response) {
-    response.forEach(function(e, i) {
+  getJSON('http://opendata2.epa.gov.tw/AQX.json', function (error, response) {
+    response.forEach(function (e, i) {
       pm[i] = [];
       pm[i][0] = e.SiteName;
       pm[i][1] = e['PM2.5'] * 1;
@@ -100,7 +104,7 @@ function _japan() {
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
     method: "GET"
-  }, function(error, response, body) {
+  }, function (error, response, body) {
     if (error || !body) {
       return;
     } else {
@@ -109,7 +113,7 @@ function _japan() {
       console.log(target[15].children[0].data);
       jp = target[15].children[0].data;
       if (jp < 0.28) {
-        bot.push('使用者 ID', '現在日幣 ' + jp + '，該買啦！');
+        bot.push('U967cd37216aad96584958423f28e92cc', '現在日幣 ' + jp + '，該買啦！');
       }
       timer2 = setInterval(_japan, 1800000);
     }
