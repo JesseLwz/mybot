@@ -112,7 +112,7 @@ function _japan() {
       var target = $(".rate-content-sight.text-right.print_hide");
       console.log(target[15].children[0].data);
       jp = target[15].children[0].data;
-      if (jp < 0.28) {
+      if (jp < 0.275) {
         bot.push('U967cd37216aad96584958423f28e92cc', '現在日幣 ' + jp + '，該買啦！');
       }
       timer2 = setInterval(_japan, 1800000);
