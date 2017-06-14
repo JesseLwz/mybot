@@ -59,7 +59,7 @@ function _bot() {
         replyMsg = '目前日幣 '+jp;
       }
       else if(msg.indexOf('屁孩') != -1){
-        var maxNum = 10;  
+        var maxNum = 6;  
         var minNum = 0;  
         var n = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
         switch(n)
