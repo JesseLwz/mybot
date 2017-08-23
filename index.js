@@ -59,8 +59,11 @@ function _bot() {
         replyMsg = '目前日幣 '+jp;
       }
       else if(msg.indexOf('美金') != -1){
-        let r = getRate(USD);
-        replyMsg = '目前美金 '+r;
+        let r = getRate('USD');
+        if(r=null)
+          replyMsg = '不要問,很恐怖';
+        else
+          replyMsg = '目前美金 '+r;
       }
       else if(msg.indexOf('屁孩') != -1){
         var maxNum = 6;  
@@ -147,7 +150,10 @@ function _japan() {
 }
 
 function getRate(curry) {
-  getJSON('https://www.google.com/finance/info?q=CURRENCY:'+curry+'TWD', function (error, response) {
-    return response['1']   
+  getJSON('https://www.google.com/finance/info?q=CURRENCY:USDTWD', function (error, response) {
+    if(error)
+      return;
+    else
+      return response['1']   
   });
 }
