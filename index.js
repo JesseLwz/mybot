@@ -154,6 +154,8 @@ function getRate(curry) {
     if(error)
       return;
     else
-      return response['rate']['sellSpot']
+      response.forEach(function (e) {
+        return e.rates.sellSpot;
+      })
   });
 }
