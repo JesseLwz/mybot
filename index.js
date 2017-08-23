@@ -60,7 +60,7 @@ function _bot() {
       }
       else if(msg.indexOf('美金') != -1){
         let r = getRate('USD');
-        if(r=null)
+        if(r == null)
           replyMsg = '不要問,很恐怖';
         else
           replyMsg = '目前美金 '+r;
@@ -150,10 +150,10 @@ function _japan() {
 }
 
 function getRate(curry) {
-  getJSON('https://www.google.com/finance/info?q=CURRENCY:USDTWD', function (error, response) {
+  getJSON('http://asper-bot-rates.appspot.com/currency.json?'+curry, function (error, response) {
     if(error)
       return;
     else
-      return response['1']   
+      return response['rate']['sellSpot']
   });
 }
