@@ -58,6 +58,10 @@ function _bot() {
       else if(msg.indexOf('日幣') != -1){
         replyMsg = '目前日幣 '+jp;
       }
+      else if(msg.indexOf('美金') != -1){
+        let r = getRate(USD);
+        replyMsg = '目前美金 '+r;
+      }
       else if(msg.indexOf('屁孩') != -1){
         var maxNum = 6;  
         var minNum = 0;  
@@ -118,7 +122,7 @@ function _getJSON() {
       pm[i][2] = e.PM10 * 1;
     });
   });
-  timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
+  timer = setInterval(_getJSON, 3600000); //每小時抓取一次新資料
 }
 
 function _japan() {
@@ -139,5 +143,11 @@ function _japan() {
       }
       timer2 = setInterval(_japan, 1800000);
     }
+  });
+}
+
+function getRate(curry) {
+  getJSON('https://www.google.com/finance/info?q=CURRENCY:'+curry+'TWD', function (error, response) {
+    return response['1']   
   });
 }
