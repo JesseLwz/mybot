@@ -13,13 +13,14 @@ var bot = linebot({
 var timer;
 var timer2;
 var pm = [];
+var rate = [];
 var jp;
 
 _getJSON();
 
 _japan();
 
-
+_getRate();
 // bot.on('message', function (event) {
 //     if (event.message.type = 'text') {
 //         var msg = '你剛說 : ' + event.message.text  + 'BTW 日匯率:'+jp;
@@ -59,11 +60,16 @@ function _bot() {
         replyMsg = '目前日幣 '+jp;
       }
       else if(msg.indexOf('美金') != -1){
-        let r = getRate('USD');
-        if(r == null)
-          replyMsg = '不要問,很恐怖';
-        else
-          replyMsg = '目前美金 '+r;
+        // let r = getRate('USD');
+        // if(r == null)
+        //   replyMsg = '不要問,很恐怖';
+        // else
+        //   replyMsg = '目前美金 '+r;
+        rate.forEach(function (e, i) {
+            if (msg.indexOf(e[0]) != -1) {
+              replyMsg = e[0] + '為 ' + e[1];
+            }
+          });
       }
       else if(msg.indexOf('屁孩') != -1){
         var maxNum = 6;  
@@ -161,4 +167,19 @@ function getRate(curry) {
    
       };   
   });
+}
+function _getRate() {
+
+  getJSON('http://asper-bot-rates.appspot.com/currency.json', function (error, response) {
+    response.forEach(function (e) {
+      
+      e.rates.forEach(function(ele,i) {
+        rate[i] = [];
+        rate[i][0] = ele[i];
+        rate[i][1] = ele[i].sellCash;
+      }, this);
+    
+    });
+  });
+
 }
