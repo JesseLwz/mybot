@@ -149,14 +149,16 @@ function _japan() {
   });
 }
 
+//抓不到
 function getRate(curry) {
-  getJSON('http://asper-bot-rates.appspot.com/currency.json?'+curry, function (error, response) {
+  getJSON('http://asper-bot-rates.appspot.com/currency.json?'+curry, function (error, data) {
     if(error)
       return;
     else
       {
-        var obj = response.rates;
-        return obj.sellSpot;
+        
+          return data.updateTime;
+   
       };   
   });
 }
