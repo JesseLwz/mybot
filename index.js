@@ -59,7 +59,7 @@ function _bot() {
         replyMsg = '目前日幣 ' + jp;
       }
       else if (msg.indexOf('測試') != -1) {
-        if(rateArray[7]==''||rateArray[7]=='undefind')
+        if(rateArray[7]==''||rateArray=='undefind'||rateArray==null)
           replyMsg = '測試軌';
         else
           replyMsg = rateArray[7];        
