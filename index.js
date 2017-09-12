@@ -23,18 +23,7 @@ _getJSON();
 _japan();
 
 _getRate();
-// bot.on('message', function (event) {
-//     if (event.message.type = 'text') {
-//         var msg = '你剛說 : ' + event.message.text  + 'BTW 日匯率:'+jp;
-//         event.reply(msg).then(function (data) {
-//             // success 
-//             console.log(msg);
-//         }).catch(function (error) {
-//             // error 
-//             console.log('error');
-//         });
-//     }
-// });
+
 
 _bot();
 const app = express();
@@ -163,6 +152,9 @@ function _getRate() {
     var title = $(".currency phone-small-font");
     var rateName = $(".visible-phone print_hide");
     var decimal = $(".rate-content-sight.text-right.print_hide");
+
+    titleArray.push(rateName[7].children[0].data);
+    
     for (var i = 0; i < title.length; i++) {
       //rateArray.push('{"'+title[i].children[1].data+'":['+decimal[4*i].children[0].data + ','+decimal[4*i+1].children[0].data+']}');
       rateArray.push('{"' + rateName[i].children[0].data + '":[' + decimal[2 * i].children[0].data +']}');
