@@ -53,7 +53,7 @@ function _bot() {
         if (titleArray.length < 1)
           replyMsg = '測試軌';
         else
-          replyMsg = titleArray[7];        
+          replyMsg = titleArray[0];        
       }
       else if (msg.indexOf('屁孩') != -1) {
         var maxNum = 6;
@@ -132,7 +132,7 @@ function _japan() {
       jp = target[15].children[0].data;
 
 
-      // var title = $(".currency phone-small-font");
+      // var title = $(".currency.phone-small-font");
        var rateName = $(".hidden-phone.print_show");
       // var decimal = $(".rate-content-sight.text-right.print_hide");
        titleArray.push(rateName[7].children[0].data);
