@@ -169,8 +169,8 @@ function _getRate() {
     //     console.log(varTime.toLocaleTimeString()+': '+a[' 日圓 (JPY)'][1]);
       
     //   });
-    var a = JSON.parse(rateArray[7]);
-    bot.push('U967cd37216aad96584958423f28e92cc', a[' 日圓 (JPY)'][1]);
+
+    bot.push('U967cd37216aad96584958423f28e92cc', rateArray[0]);
 
     //timer2 = setInterval(_japan, 120000);
   });
