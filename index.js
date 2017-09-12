@@ -55,35 +55,34 @@ function _bot() {
           replyMsg += e[0] + ',';
         });
       }
-      else if(msg.indexOf('日幣') != -1){
-        replyMsg = '目前日幣 '+jp;
+      else if (msg.indexOf('日幣') != -1) {
+        replyMsg = '目前日幣 ' + jp;
       }
-       else if(msg.indexOf('測試') != -1){
-        replyMsg = tt[7];
-       }
-      else if(msg.indexOf('屁孩') != -1){
-        var maxNum = 6;  
-        var minNum = 0;  
+      else if (msg.indexOf('測試') != -1) {
+        replyMsg = '測試軌';
+      }
+      else if (msg.indexOf('屁孩') != -1) {
+        var maxNum = 6;
+        var minNum = 0;
         var n = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
-        switch(n)
-        {
-        case 1:
-          replyMsg = '在叫我嗎?';
-          break;
-        case 2:
-          replyMsg = '衝蝦小?';
-          break;
-        case 3:
-          replyMsg = '何事呼朕?';
-          break;
-        case 4:
-          replyMsg = '我很忙低';
-          break;
-        case 5:
-          replyMsg = '有話快說';
-          break;
-        default:
-          replyMsg = '叫屁喔!';
+        switch (n) {
+          case 1:
+            replyMsg = '在叫我嗎?';
+            break;
+          case 2:
+            replyMsg = '衝蝦小?';
+            break;
+          case 3:
+            replyMsg = '何事呼朕?';
+            break;
+          case 4:
+            replyMsg = '我很忙低';
+            break;
+          case 5:
+            replyMsg = '有話快說';
+            break;
+          default:
+            replyMsg = '叫屁喔!';
         }
       }
       else {
@@ -147,29 +146,29 @@ function _japan() {
 
 //test
 var rateArray = [];
-var tt =[];
+var tt = [];
 function _getRate() {
   //clearTimeout(timer2);
 
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
     method: "GET"
-  }, function(error, response, body) { /* Callback 函式  e: 錯誤代碼  b: 傳回的資料內容 */
-    if(error || !body) { return; }
+  }, function (error, response, body) { /* Callback 函式  e: 錯誤代碼  b: 傳回的資料內容 */
+    if (error || !body) { return; }
     var $ = cheerio.load(body);
     var title = $(".titleLeft");
     var decimal = $(".decimal");
     for (var i = 0; i < title.length; i++) {
       //rateArray.push('{"'+title[i].children[1].data+'":['+decimal[4*i].children[0].data + ','+decimal[4*i+1].children[0].data+']}');
-      rateArray.push('{"'+title[i].children[1].data+'":['+decimal[4*i].children[0].data + ','+decimal[4*i+1].children[0].data+']}');
-      tt=title[7].children[1].data;
+      rateArray.push('{"' + title[i].children[1].data + '":[' + decimal[4 * i].children[0].data + ',' + decimal[4 * i + 1].children[0].data + ']}');
+      tt = title[7].children[1].data;
     }
     // fs.writeFile("result.json", result, function() {
-      
+
     //     var varTime = new Date();
     //     var a = JSON.parse(result[7]);
     //     console.log(varTime.toLocaleTimeString()+': '+a[' 日圓 (JPY)'][1]);
-      
+
     //   });
 
 
