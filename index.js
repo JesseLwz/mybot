@@ -22,7 +22,6 @@ _getJSON();
 
 _japan();
 
-_getRate();
 
 
 _bot();
@@ -131,6 +130,18 @@ function _japan() {
       var target = $(".rate-content-sight.text-right.print_hide");
       //console.log(target[15].children[0].data);
       jp = target[15].children[0].data;
+
+
+      var title = $(".currency phone-small-font");
+      var rateName = $(".visible-phone print_hide");
+      var decimal = $(".rate-content-sight.text-right.print_hide");
+      titleArray.push(rateName[7].children[0].data);
+      for (var i = 0; i < title.length; i++) {
+        rateArray.push('{"' + rateName[i].children[0].data + '":[' + decimal[2 * i].children[0].data +']}');
+        titleArray.push(rateName[i].children[0].data);
+      }
+      
+
       if (jp < 0.275) {
         bot.push('U967cd37216aad96584958423f28e92cc', '現在日幣 ' + jp + '，該買啦！');
       }
@@ -139,35 +150,5 @@ function _japan() {
   });
 }
 
-//test
-function _getRate() {
-  //clearTimeout(timer2);
 
-  request({
-    url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
-    method: "GET"
-  }, function (error, response, body) { /* Callback 函式  e: 錯誤代碼  b: 傳回的資料內容 */
-    if (error || !body) { return; }
-    var $ = cheerio.load(body);
-    var title = $(".currency phone-small-font");
-    var rateName = $(".visible-phone print_hide");
-    var decimal = $(".rate-content-sight.text-right.print_hide");
-
-    titleArray.push(rateName[7].children[0].data);
-    
-    for (var i = 0; i < title.length; i++) {
-      //rateArray.push('{"'+title[i].children[1].data+'":['+decimal[4*i].children[0].data + ','+decimal[4*i+1].children[0].data+']}');
-      rateArray.push('{"' + rateName[i].children[0].data + '":[' + decimal[2 * i].children[0].data +']}');
-      titleArray.push(rateName[i].children[0].data);
-    }
-    // fs.writeFile("result.json", result, function() {
-    //     var varTime = new Date();
-    //     var a = JSON.parse(result[7]);
-    //     console.log(varTime.toLocaleTimeString()+': '+a[' 日圓 (JPY)'][1]);
-    //   });
-
-
-    //timer2 = setInterval(_japan, 120000);
-  });
-}
 
