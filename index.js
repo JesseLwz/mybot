@@ -59,10 +59,10 @@ function _bot() {
         replyMsg = '目前日幣 ' + jp;
       }
       else if (msg.indexOf('測試') != -1) {
-        if(rateArray[7]==''||rateArray=='undefind'||rateArray==null)
+        if (titleArray.length < 1)
           replyMsg = '測試軌';
         else
-          replyMsg = rateArray[7];        
+          replyMsg = titleArray[7];        
       }
       else if (msg.indexOf('屁孩') != -1) {
         var maxNum = 6;
@@ -137,7 +137,7 @@ function _japan() {
     } else {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
-      console.log(target[15].children[0].data);
+      //console.log(target[15].children[0].data);
       jp = target[15].children[0].data;
       if (jp < 0.275) {
         bot.push('U967cd37216aad96584958423f28e92cc', '現在日幣 ' + jp + '，該買啦！');
@@ -149,6 +149,7 @@ function _japan() {
 
 //test
 var rateArray = [];
+var titleArray =[];
 function _getRate() {
   //clearTimeout(timer2);
 
@@ -164,6 +165,7 @@ function _getRate() {
     for (var i = 0; i < title.length; i++) {
       //rateArray.push('{"'+title[i].children[1].data+'":['+decimal[4*i].children[0].data + ','+decimal[4*i+1].children[0].data+']}');
       rateArray.push('{"' + rateName[i].children[0].data + '":[' + decimal[2 * i].children[0].data +']}');
+      titleArray.push(rateName[i].children[0].data);
     }
     // fs.writeFile("result.json", result, function() {
     //     var varTime = new Date();
