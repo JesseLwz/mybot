@@ -58,13 +58,9 @@ function _bot() {
       else if(msg.indexOf('日幣') != -1){
         replyMsg = '目前日幣 '+jp;
       }
-      // else if(msg.indexOf('美金') != -1){
-      //   let r = getRate('USD');
-      //   if(r == null)
-      //     replyMsg = '不要問,很恐怖';
-      //   else
-      //     replyMsg = '目前美金 '+r;
-      // }
+       else if(msg.indexOf('測試') != -1){
+        _getRate();
+       }
       else if(msg.indexOf('屁孩') != -1){
         var maxNum = 6;  
         var minNum = 0;  
@@ -173,8 +169,8 @@ function _getRate() {
     //     console.log(varTime.toLocaleTimeString()+': '+a[' 日圓 (JPY)'][1]);
       
     //   });
-
-    bot.push('U967cd37216aad96584958423f28e92cc', rateArray[7]);
+    var a = JSON.parse(rateArray[7]);
+    bot.push('U967cd37216aad96584958423f28e92cc', a[' 日圓 (JPY)'][1]);
 
     //timer2 = setInterval(_japan, 120000);
   });
