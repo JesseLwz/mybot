@@ -149,6 +149,8 @@ function _japan() {
 var rateArray = [];
 function _getRate() {
   //clearTimeout(timer2);
+  var tt="";
+
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
     method: "GET"
@@ -160,7 +162,7 @@ function _getRate() {
     for (var i = 0; i < title.length; i++) {
       //rateArray.push('{"'+title[i].children[1].data+'":['+decimal[4*i].children[0].data + ','+decimal[4*i+1].children[0].data+']}');
       rateArray.push('{"'+title[i].children[1].data+'":['+decimal[4*i].children[0].data + ','+decimal[4*i+1].children[0].data+']}');
-      
+      tt=title[7].children[1].data;
     }
     // fs.writeFile("result.json", result, function() {
       
@@ -170,7 +172,7 @@ function _getRate() {
       
     //   });
 
-    bot.push('U967cd37216aad96584958423f28e92cc', rateArray[0]);
+    bot.push('U967cd37216aad96584958423f28e92cc', tt);
 
     //timer2 = setInterval(_japan, 120000);
   });
