@@ -59,7 +59,7 @@ function _bot() {
         replyMsg = '目前日幣 '+jp;
       }
        else if(msg.indexOf('測試') != -1){
-        _getRate();
+        replyMsg = tt[7];
        }
       else if(msg.indexOf('屁孩') != -1){
         var maxNum = 6;  
@@ -147,9 +147,9 @@ function _japan() {
 
 //test
 var rateArray = [];
+var tt =[];
 function _getRate() {
   //clearTimeout(timer2);
-  var tt="";
 
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
@@ -172,7 +172,7 @@ function _getRate() {
       
     //   });
 
-    bot.push('U967cd37216aad96584958423f28e92cc', tt);
+
 
     //timer2 = setInterval(_japan, 120000);
   });
