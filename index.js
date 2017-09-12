@@ -163,7 +163,7 @@ function _getRate() {
     var decimal = $(".rate-content-sight.text-right.print_hide");
     for (var i = 0; i < title.length; i++) {
       //rateArray.push('{"'+title[i].children[1].data+'":['+decimal[4*i].children[0].data + ','+decimal[4*i+1].children[0].data+']}');
-      rateArray.push('{"' + rateName[i].children[1].data + '":[' + decimal[2 * i].children[0].data +']}');
+      rateArray.push('{"' + rateName[i].children[0].data + '":[' + decimal[2 * i].children[0].data +']}');
     }
     // fs.writeFile("result.json", result, function() {
     //     var varTime = new Date();
