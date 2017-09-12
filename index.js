@@ -132,15 +132,15 @@ function _japan() {
       jp = target[15].children[0].data;
 
 
-      var title = $(".currency phone-small-font");
-      var rateName = $(".visible-phone print_hide");
-      var decimal = $(".rate-content-sight.text-right.print_hide");
-      titleArray.push(rateName[7].children[0].data);
-      for (var i = 0; i < title.length; i++) {
-        rateArray.push('{"' + rateName[i].children[0].data + '":[' + decimal[2 * i].children[0].data +']}');
-        titleArray.push(rateName[i].children[0].data);
-      }
-      
+      // var title = $(".currency phone-small-font");
+      // var rateName = $(".visible-phone print_hide");
+      // var decimal = $(".rate-content-sight.text-right.print_hide");
+      // titleArray.push(rateName[7].children[0].data);
+      // for (var i = 0; i < title.length; i++) {
+      //   rateArray.push('{"' + rateName[i].children[0].data + '":[' + decimal[2 * i].children[0].data +']}');
+      //   titleArray.push(rateName[i].children[0].data);
+      // }
+
 
       if (jp < 0.275) {
         bot.push('U967cd37216aad96584958423f28e92cc', '現在日幣 ' + jp + '，該買啦！');
