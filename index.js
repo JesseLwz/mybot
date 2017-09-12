@@ -1,8 +1,8 @@
 var linebot = require('linebot');
 var express = require('express');
 var getJSON = require('get-json');
-var request = require("request");
-var cheerio = require("cheerio");
+var request = require("request"); //可以想像成就是在後端載入一個網頁
+var cheerio = require("cheerio"); //網頁裡面的 jQuery ( 用法一樣，因為它的核心就是 jQuery )
 
 var bot = linebot({
   channelId: 1519666472,
@@ -19,6 +19,7 @@ _getJSON();
 
 _japan();
 
+_getRate();
 // bot.on('message', function (event) {
 //     if (event.message.type = 'text') {
 //         var msg = '你剛說 : ' + event.message.text  + 'BTW 日匯率:'+jp;
@@ -148,22 +149,34 @@ function _japan() {
   });
 }
 
-//抓不到
-function getRate(curry) {
-  let r='';
-  getJSON('http://asper-bot-rates.appspot.com/currency.json?' + curry, function (error, data) {
-    if (error)
-      return;
-    else {
-      console.log(data['rates']);
-      data['rates'].forEach(function (e, i) {
-        if(e=='USD'){
-          r=e.sellCash;
-        }
-      });
+//test
+var rateArray = [];
+function _getRate() {
+  //clearTimeout(timer2);
+  request({
+    url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
+    method: "GET"
+  }, function(error, response, body) { /* Callback 函式  e: 錯誤代碼  b: 傳回的資料內容 */
+    if(error || !body) { return; }
+    var $ = cheerio.load(body);
+    var title = $(".titleLeft");
+    var decimal = $(".decimal");
+    for (var i = 0; i < title.length; i++) {
+      //rateArray.push('{"'+title[i].children[1].data+'":['+decimal[4*i].children[0].data + ','+decimal[4*i+1].children[0].data+']}');
+      rateArray.push('{"'+title[i].children[1].data+'":['+decimal[4*i].children[0].data + ','+decimal[4*i+1].children[0].data+']}');
       
-      return r;
-    };
+    }
+    // fs.writeFile("result.json", result, function() {
+      
+    //     var varTime = new Date();
+    //     var a = JSON.parse(result[7]);
+    //     console.log(varTime.toLocaleTimeString()+': '+a[' 日圓 (JPY)'][1]);
+      
+    //   });
+
+    bot.push('U967cd37216aad96584958423f28e92cc', rateArray[7]);
+
+    //timer2 = setInterval(_japan, 120000);
   });
 }
 
