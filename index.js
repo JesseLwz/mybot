@@ -133,9 +133,9 @@ function _japan() {
 
 
       // var title = $(".currency phone-small-font");
-      // var rateName = $(".visible-phone print_hide");
+       var rateName = $(".hidden-phone print_show");
       // var decimal = $(".rate-content-sight.text-right.print_hide");
-      // titleArray.push(rateName[7].children[0].data);
+       titleArray.push(rateName[7].children[0].data);
       // for (var i = 0; i < title.length; i++) {
       //   rateArray.push('{"' + rateName[i].children[0].data + '":[' + decimal[2 * i].children[0].data +']}');
       //   titleArray.push(rateName[i].children[0].data);
