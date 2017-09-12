@@ -57,13 +57,13 @@ function _bot() {
       else if(msg.indexOf('日幣') != -1){
         replyMsg = '目前日幣 '+jp;
       }
-      else if(msg.indexOf('美金') != -1){
-        let r = getRate('USD');
-        if(r == null)
-          replyMsg = '不要問,很恐怖';
-        else
-          replyMsg = '目前美金 '+r;
-      }
+      // else if(msg.indexOf('美金') != -1){
+      //   let r = getRate('USD');
+      //   if(r == null)
+      //     replyMsg = '不要問,很恐怖';
+      //   else
+      //     replyMsg = '目前美金 '+r;
+      // }
       else if(msg.indexOf('屁孩') != -1){
         var maxNum = 6;  
         var minNum = 0;  
@@ -150,15 +150,20 @@ function _japan() {
 
 //抓不到
 function getRate(curry) {
-  getJSON('http://asper-bot-rates.appspot.com/currency.json?'+curry, function (error, data) {
-    if(error)
+  let r='';
+  getJSON('http://asper-bot-rates.appspot.com/currency.json?' + curry, function (error, data) {
+    if (error)
       return;
-    else
-      {
-        
-          return data.updateTime;
-   
-      };   
+    else {
+      console.log(data['rates']);
+      data['rates'].forEach(function (e, i) {
+        if(e=='USD'){
+          r=e.sellCash;
+        }
+      });
+      
+      return r;
+    };
   });
 }
 
