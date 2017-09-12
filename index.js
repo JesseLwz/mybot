@@ -15,6 +15,9 @@ var timer2;
 var pm = [];
 var jp;
 
+var rateArray = [];
+var titleArray =[];
+
 _getJSON();
 
 _japan();
@@ -148,8 +151,6 @@ function _japan() {
 }
 
 //test
-var rateArray = [];
-var titleArray =[];
 function _getRate() {
   //clearTimeout(timer2);
 
