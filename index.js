@@ -53,7 +53,7 @@ function _bot() {
           }          
         });
         if (replyMsg == '') {
-          replyMsg = msg +'的'+rateArray[7][1]+'怎麼會'+msg.indexOf(rateArray[7][1]);
+          replyMsg = msg +'的'+rateArray[7][0]+'怎麼會'+msg.indexOf(rateArray[7][1]);
         }
       }
       else if (msg.indexOf('日幣') != -1) {
@@ -151,7 +151,7 @@ function _japan() {
         var res = rateName[i].children[0].data.split("(")
 
         rateArray[i] = [];
-        rateArray[i][0] = res[0].trimRight();  //中文
+        rateArray[i][0] = res[0].trim();  //中文
         rateArray[i][1] = res[1].replace(")", "").trimRight(); //簡英
         rateArray[i][2] = decimal[2 * i].children[0].data;
         
