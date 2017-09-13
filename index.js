@@ -44,14 +44,14 @@ function _bot() {
           replyMsg += e[0] + ',';
         });
         if(replyMsg!='')
-          replyMsg.slice(0, -1);
+          replyMsg = replyMsg.slice(0, -1);
       }
       else if (msg.indexOf('幣別') != -1) {
         rateArray.forEach(function (e, i) {
           replyMsg += e[0] + ',';
         });
         if(replyMsg!='')
-          replyMsg.slice(0, -1);
+          replyMsg = replyMsg.slice(0, -1);
       }
       else if (msg.indexOf('匯率') != -1) {
         rateArray.forEach(function (e, i) {
