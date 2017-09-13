@@ -12,11 +12,9 @@ var bot = linebot({
 
 var timer;
 var timer2;
-var pm = [];
-var jp;
-
-var rateArray = [];
-var titleArray = [];
+var pm = [];  //紀錄地點PM2.5
+var jp; //指定紀錄日圓
+var rateArray = [];//紀錄幣別匯率
 
 _getJSON();
 
@@ -142,29 +140,22 @@ function _japan() {
       //console.log(target[15].children[0].data);
       jp = target[15].children[0].data;
 
-      //TODO 幣別匯率做成 Array or JSON
+      //爬蟲方式抓HTML上資料 幣別匯率存成 Array or JSON
       var title = $(".currency.phone-small-font");
       var rateName = $(".hidden-phone.print_show");
       var decimal = $(".rate-content-sight.text-right.print_hide");
-      //titleArray.push(rateName[7].children[0].data);
       for (var i = 0; i < title.length; i++) {
-
         var res = rateName[i].children[0].data.split("(")
-
         rateArray[i] = [];
-        rateArray[i][0] = res[0].trim();  //中文
-        rateArray[i][1] = res[1].replace(")", "").trimRight(); //簡英
-        rateArray[i][2] = decimal[(2 * i)+1].children[0].data;
-        
-        //rateArray.push('{"' + rateName[i].children[0].data + '":[' + decimal[2 * i].children[0].data + ']}');
-        //titleArray.push(rateName[i].children[0].data);
+        rateArray[i][0] = res[0].trim();  //日圓
+        rateArray[i][1] = res[1].replace(")", "").trimRight(); //JPY
+        rateArray[i][2] = decimal[(2 * i)+1].children[0].data; //匯率
       }
 
-
-      if (jp < 0.275) {
+      if (jp < 0.273) {
         bot.push('U967cd37216aad96584958423f28e92cc', '現在日幣 ' + jp + '，該買啦！');
       }
-      timer2 = setInterval(_japan, 1800000);
+      timer2 = setInterval(_japan, 1800000);//每半小時抓取一次新資料
     }
   });
 }
