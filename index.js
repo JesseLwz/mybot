@@ -50,11 +50,11 @@ function _bot() {
         rateArray.forEach(function (e, i) {
           if (msg.indexOf(e[0]) != -1 || msg.indexOf(e[1]) != -1) {
             replyMsg = e[0] + '的匯率為 ' + e[2];
-          }
-          if (replyMsg == '') {
-            replyMsg = '不懂';
-          }
+          }          
         });
+        if (replyMsg == '') {
+          replyMsg = '不懂';
+        }
       }
       else if (msg.indexOf('日幣') != -1) {
         replyMsg = '目前日幣 ' + jp;
