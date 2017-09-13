@@ -60,10 +60,10 @@ function _bot() {
         replyMsg = '目前日幣 ' + jp;
       }
       else if (msg.indexOf('測試') != -1) {
-        if (titleArray.length < 1)
+        if (rateArray.length < 1)
           replyMsg = '測試軌';
         else
-          replyMsg = titleArray[7];
+          replyMsg = rateArray[6][1];
       }
       else if (msg.indexOf('屁孩') != -1) {
         var maxNum = 6;
