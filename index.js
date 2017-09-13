@@ -53,7 +53,8 @@ function _bot() {
           }          
         });
         if (replyMsg == '') {
-          replyMsg = msg +'的'+rateArray[7][0]+'怎麼會'+msg.indexOf(rateArray[7][1]);
+          // replyMsg = msg +'的'+rateArray[7][0]+'怎麼會'+msg.indexOf(rateArray[7][1]);
+          replyMsg = '不懂';
         }
       }
       else if (msg.indexOf('日幣') != -1) {
