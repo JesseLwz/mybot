@@ -53,7 +53,7 @@ function _bot() {
           }          
         });
         if (replyMsg == '') {
-          replyMsg = '不懂';
+          replyMsg = '怎麼會'+msg.indexOf(rateArray[7][1]);
         }
       }
       else if (msg.indexOf('日幣') != -1) {
@@ -63,7 +63,7 @@ function _bot() {
         if (rateArray.length < 1)
           replyMsg = '測試軌';
         else
-          replyMsg = rateArray[6][1];
+          replyMsg = rateArray[7][1];
       }
       else if (msg.indexOf('屁孩') != -1) {
         var maxNum = 6;
