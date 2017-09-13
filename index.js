@@ -153,7 +153,7 @@ function _japan() {
         rateArray[i] = [];
         rateArray[i][0] = res[0].trim();  //中文
         rateArray[i][1] = res[1].replace(")", "").trimRight(); //簡英
-        rateArray[i][2] = decimal[2 * i].children[0].data;
+        rateArray[i][2] = decimal[(2 * i)+1].children[0].data;
         
         //rateArray.push('{"' + rateName[i].children[0].data + '":[' + decimal[2 * i].children[0].data + ']}');
         //titleArray.push(rateName[i].children[0].data);
