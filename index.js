@@ -131,12 +131,12 @@ function _bot() {
       }
 
       if(reType=='text'){
-        //replayText(replyMsg);
-        event.reply(replyMsg).then(function (data) {
-          console.log(replyMsg);
-        }).catch(function (error) {
-          console.log('error');
-        });        
+        replayText(replyMsg);
+        // event.reply(replyMsg).then(function (data) {
+        //   console.log(replyMsg);
+        // }).catch(function (error) {
+        //   console.log('error');
+        // });        
       }
       else if(reType=='pic'){
 
