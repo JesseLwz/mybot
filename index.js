@@ -138,14 +138,16 @@ function _bot() {
         // });        
       }
       else if(reType=='pic'){
-        event.reply({
-          type: 'image',
-          originalContentUrl: picUrl,
-          previewImageUrl: picUrl
-        }).catch(function(error){
-          replayText(error.toString());
-        });
-      }
+        replayText(picUrl);
+
+      //   event.reply({
+      //     type: 'image',
+      //     originalContentUrl: picUrl,
+      //     previewImageUrl: picUrl
+      //   }).catch(function (error) {
+      //     replayText(error.toString());
+      //   });
+       }
 
     }
   });
