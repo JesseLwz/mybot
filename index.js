@@ -1,4 +1,4 @@
-import GoogleImageSearch from 'free-google-image-search'
+//import GoogleImageSearch from 'free-google-image-search'
 
 var linebot = require('linebot');
 var express = require('express');
@@ -44,18 +44,19 @@ function _bot() {
       var reType = 'text';
       var picUrl ='';
       
-      if(msg.indexOf('梗圖') == 0) {
-        reType='pic';
-        var searchKey = msg.slice(2);
-        GoogleImageSearch.searchImage(searchKey)
-        .then((res) => {
-            //console.log(res); // This will return array of image URLs 
-            if(res.length>0) {
-              picUrl = res[0];
-            }
-          })
-      }
-      else if (msg.indexOf('地點') != -1) {
+      // if(msg.indexOf('梗圖') == 0) {
+      //   reType='pic';
+      //   var searchKey = msg.slice(2);
+      //   GoogleImageSearch.searchImage(searchKey)
+      //   .then((res) => {
+      //       //console.log(res); // This will return array of image URLs 
+      //       if(res.length>0) {
+      //         picUrl = res[0];
+      //       }
+      //     })
+      // }
+      // else 
+      if (msg.indexOf('地點') != -1) {
         pm.forEach(function (e, i) {
           replyMsg += e[0] + ',';
         });
