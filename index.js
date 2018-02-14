@@ -131,12 +131,11 @@ function _bot() {
       }
 
       if(reType=='text'){
-        replayText(replyMsg);
-        // event.reply(replyMsg).then(function (data) {
-        //   console.log(replyMsg);
-        // }).catch(function (error) {
-        //   console.log('error');
-        // });        
+        event.reply(replyMsg).then(function (data) {
+          console.log(replyMsg);
+        }).catch(function (error) {
+          console.log('error');
+        });        
       }
       else if(reType=='pic'){
 
@@ -162,13 +161,6 @@ function _bot() {
   });
 }
 
-function replayText(_replyMsg){
-  event.reply(_replyMsg).then(function (data) {
-    console.log(_replyMsg);
-  }).catch(function (error) {
-    console.log('error');
-  });    
-}
 
 function _getJSON() {
   clearTimeout(timer);
