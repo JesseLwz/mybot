@@ -130,22 +130,33 @@ function _bot() {
       }
 
       if(reType=='text'){
-        event.reply(replyMsg).then(function (data) {
-          console.log(replyMsg);
-        }).catch(function (error) {
-          console.log('error');
-        });        
+        replayText(replyMsg);
+        // event.reply(replyMsg).then(function (data) {
+        //   console.log(replyMsg);
+        // }).catch(function (error) {
+        //   console.log('error');
+        // });        
       }
       else if(reType=='pic'){
         event.reply({
           type: 'image',
           originalContentUrl: picUrl,
           previewImageUrl: picUrl
+        }).catch(function(error){
+          replayText(error.toString());
         });
       }
 
     }
   });
+}
+
+function replayText(_replyMsg){
+  event.reply(_replyMsg).then(function (data) {
+    console.log(_replyMsg);
+  }).catch(function (error) {
+    console.log('error');
+  });    
 }
 
 function _getJSON() {
