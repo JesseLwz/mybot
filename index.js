@@ -1,4 +1,4 @@
-//import GoogleImageSearch from 'free-google-image-search'
+import GoogleImageSearch from 'free-google-image-search'
 
 var linebot = require('linebot');
 var express = require('express');
@@ -146,7 +146,6 @@ function _bot() {
         });        
       
         
-        //replayText(picUrl);
 
       //   event.reply({
       //     type: 'image',
