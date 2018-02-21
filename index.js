@@ -209,7 +209,7 @@ function _japan() {
   });
 }
 
-function searchImagesearchImage(query) {
+function searchImage(query) {
   query = encodeURIComponent(query)
 
   return new Promise( (resolve, reject) => {
