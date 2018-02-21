@@ -143,23 +143,23 @@ function _bot() {
       }
       else if(reType=='pic'){
 
-        event.reply(picUrl).then(function (data) {
-          console.log(picUrl);
-        }).catch(function (error) {
-          console.log('error');
-        });        
-      
+        // event.reply(picUrl).then(function (data) {
+        //   console.log(picUrl);
+        // }).catch(function (error) {
+        //   console.log('error');
+        // });     
         
 
-      //   event.reply({
-      //     type: 'image',
-      //     originalContentUrl: picUrl,
-      //     previewImageUrl: picUrl
-      //   }).catch(function (error) {
-      //     replayText(error.toString());
-      //   });
-       }
+        event.reply({
+          type: 'image',
+          originalContentUrl: picUrl,
+          previewImageUrl: picUrl
+        }).catch(function (error) {
+          replayText(error.toString());
+        });
 
+
+       }
     }
   });
 }
