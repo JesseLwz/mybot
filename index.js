@@ -45,18 +45,18 @@ function _bot() {
       var reType = 'text';
       var picUrl ='';
       
-      // if(msg.indexOf('梗圖') == 0) {
-      //   reType='pic';
-      //   var searchKey = msg.slice(2);
-      //   GoogleImageSearch.searchImage(searchKey)
-      //   .then((res) => {
-      //       //console.log(res); // This will return array of image URLs 
-      //       if(res.length>0) {
-      //         picUrl = res[0];
-      //       }
-      //     })
-      // }
-      // else 
+      if(msg.indexOf('梗圖') == 0) {
+        reType='pic';
+        var searchKey = msg.slice(2);
+        searchImage(searchKey)
+        .then((res) => {
+            //console.log(res); // This will return array of image URLs 
+            if(res.length>0) {
+              picUrl = res[0];
+            }
+          })
+      }
+      else 
       if (msg.indexOf('地點') != -1) {
         pm.forEach(function (e, i) {
           replyMsg += e[0] + ',';
@@ -209,5 +209,37 @@ function _japan() {
   });
 }
 
+function searchImagesearchImage(query) {
+  query = encodeURIComponent(query)
+
+  return new Promise( (resolve, reject) => {
+
+      // Fetches Items from Google Image Search URL
+      fetch("https://cors-anywhere.herokuapp.com/https://www.google.com.ua/search?source=lnms&sa=X&gbv=1&tbm=isch&q="+query)
+      .then( res => res.text() )
+      .then( res => {
+
+          // Transforms HTML string into DOM object
+          let parser = new DOMParser()
+          parser = parser.parseFromString(res, "text/html")
+
+          // Gets DOM element with image results
+          let images = parser.getElementById("ires").childNodes[0]
+
+          if (images.nodeName === "DIV") {
+
+              resolve(this.googleGetMobile(images))
+          } else if (images.nodeName === "TABLE") {
+
+              resolve(this.googleGetDesktop(images))
+          } else {
+
+              reject("Unknown System")
+          }
+
+      })
+      .catch( err => reject(err) )
+  })
+}
 
 
