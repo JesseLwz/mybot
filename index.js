@@ -1,4 +1,5 @@
-import GoogleImageSearch from 'free-google-image-search'
+//import GoogleImageSearch from 'free-google-image-search'
+var imageSearch = require('free-google-image-search');
 
 var linebot = require('linebot');
 var express = require('express');
