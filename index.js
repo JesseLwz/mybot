@@ -47,14 +47,17 @@ function _bot() {
       
       if(msg.indexOf('梗圖') == 0) {
         reType='pic';
-        var searchKey = msg.slice(2);
-        searchImage(searchKey)
-        .then((res) => {
-            //console.log(res); // This will return array of image URLs 
-            if(res.length>0) {
-              picUrl = res[0];
-            }
-          })
+
+        picUrl = 'https://i.imgur.com/PVDpNQ8.png'
+        
+        // var searchKey = msg.slice(2);
+        // searchImage(searchKey)
+        // .then((res) => {
+        //     //console.log(res); // This will return array of image URLs 
+        //     if(res.length>0) {
+        //       picUrl = res[0];
+        //     }
+        //   })
       }
       else 
       if (msg.indexOf('地點') != -1) {
