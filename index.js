@@ -1,5 +1,4 @@
-//import GoogleImageSearch from 'free-google-image-search'
-//var imageSearch = require('free-google-image-search');
+var search = require('image-search');
 
 var linebot = require('linebot');
 var express = require('express');
@@ -47,17 +46,17 @@ function _bot() {
       
       if(msg.indexOf('梗圖') == 0) {
         reType='pic';
-
+        
+        //測試固定圖址 一定要走HTTPS
         picUrl = 'https://i.imgur.com/PVDpNQ8.png'
         
-        // var searchKey = msg.slice(2);
-        // searchImage(searchKey)
-        // .then((res) => {
-        //     //console.log(res); // This will return array of image URLs 
-        //     if(res.length>0) {
-        //       picUrl = res[0];
-        //     }
-        //   })
+        search.google('cats', function(err, images) {
+          // array of images
+          picUrl = images[0]
+        });
+
+
+
       }
       else 
       if (msg.indexOf('地點') != -1) {
@@ -142,14 +141,13 @@ function _bot() {
         });        
       }
       else if(reType=='pic'){
-
+        //回傳網址看看
         // event.reply(picUrl).then(function (data) {
         //   console.log(picUrl);
         // }).catch(function (error) {
         //   console.log('error');
-        // });     
+        // });   
         
-
         event.reply({
           type: 'image',
           originalContentUrl: picUrl,
@@ -157,7 +155,6 @@ function _bot() {
         }).catch(function (error) {
           replayText(error.toString());
         });
-
 
        }
     }
@@ -211,6 +208,11 @@ function _japan() {
     }
   });
 }
+
+
+
+
+
 
 function searchImage(query) {
   query = encodeURIComponent(query)
