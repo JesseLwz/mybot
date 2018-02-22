@@ -1,4 +1,4 @@
-var search = require('image-search');
+//var search = require('image-search');
 
 var linebot = require('linebot');
 var express = require('express');
