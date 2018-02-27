@@ -100,9 +100,10 @@ function _bot() {
           });
         
           res.on("end", function () {
-            var picUrl = chunks[Math.floor(Math.random() * chunks.length)];
-            // var body = Buffer.concat(chunks);
-            // console.log(body.toString());
+            //picUrl = chunks[Math.floor(Math.random() * chunks.length)];
+             //var body = Buffer.concat(chunks);
+             //console.log(body.toString());
+             picUrl = chunks[1];
           });
         });
         
