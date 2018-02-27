@@ -20,10 +20,36 @@ var pm = [];  //紀錄地點PM2.5
 var jp; //指定紀錄日圓
 var rateArray = [];//紀錄幣別匯率
 
+var testst = '';
+
 _getJSON();
 
 _japan();
 
+
+test();
+
+function test(){
+  var imgur_options = {
+    method: 'GET',
+    uri: `https://api.imgur.com/3/album/TeOvP/images`,
+    headers: {
+      "Authorization": `Client-ID 3c3846d8407e6a3`
+    },
+    json: true
+  };
+
+  return rp(imgur_options)
+    .then(function (imgur_response) {
+      // collect image urls from the album
+      var array_images = [];
+      imgur_response.data.forEach(function (item) {
+        array_images.push(item.link);
+      })
+      // choose one of images randomly
+      testst = array_images[Math.floor(Math.random() * array_images.length)];
+    })
+}
 
 
 _bot();
@@ -50,29 +76,27 @@ function _bot() {
         reType = 'pic';
 
         //測試固定圖址 一定要走HTTPS
-        picUrl = 'https://i.imgur.com/PVDpNQ8.png'
+        //picUrl = 'https://i.imgur.com/PVDpNQ8.png'
 
-        // var imgur_options = {
-        //   method: 'GET',
-        //   uri: `https://api.imgur.com/3/album/TeOvP/images`,
-        //   headers: {
-        //     "Authorization": `Client-ID 3c3846d8407e6a3`
-        //   },
-        //   json: true
-        // };
+        var imgur_options = {
+          method: 'GET',
+          uri: `https://api.imgur.com/3/album/TeOvP/images`,
+          headers: {
+            "Authorization": `Client-ID 3c3846d8407e6a3`
+          },
+          json: true
+        };
 
-        // return rp(imgur_options)
-        //   .then(function (imgur_response) {
-
-        //     // collect image urls from the album
-        //     var array_images = [];
-        //     imgur_response.data.forEach(function (item) {
-        //       array_images.push(item.link);
-        //     })
-
-        //     // choose one of images randomly
-        //     var picUrl = array_images[Math.floor(Math.random() * array_images.length)];
-        //   })
+        return rp(imgur_options)
+          .then(function (imgur_response) {
+            // collect image urls from the album
+            var array_images = [];
+            imgur_response.data.forEach(function (item) {
+              array_images.push(item.link);
+            })
+            // choose one of images randomly
+            picUrl = array_images[Math.floor(Math.random() * array_images.length)];
+          })
 
         // var options = {
         //   "method": "GET",
@@ -112,6 +136,11 @@ function _bot() {
         // req.end();
 
       }
+      else if(msg.indexOf('地精') == 0){
+        replyMsg=testst;
+      }
+
+
       else
         if (msg.indexOf('地點') != -1) {
           pm.forEach(function (e, i) {
