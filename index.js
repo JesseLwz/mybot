@@ -6,6 +6,7 @@ var request = require("request"); //可以想像成就是在後端載入一個�
 var cheerio = require("cheerio"); //網頁裡面的 jQuery ( 用法一樣，因為它的核心就是 jQuery )
 
 var rp = require('request-promise');
+var http = require("https");
 
 var bot = linebot({
   channelId: 1519666472,
@@ -51,27 +52,61 @@ function _bot() {
         //測試固定圖址 一定要走HTTPS
         //picUrl = 'https://i.imgur.com/PVDpNQ8.png'
 
-        var imgur_options = {
-          method: 'GET',
-          uri: `https://api.imgur.com/3/album/TeOvP/images`,
-          headers: {
-            "Authorization": `Client-ID 3c3846d8407e6a3`
-          },
-          json: true
-      };
+        // var imgur_options = {
+        //   method: 'GET',
+        //   uri: `https://api.imgur.com/3/album/TeOvP/images`,
+        //   headers: {
+        //     "Authorization": `Client-ID 3c3846d8407e6a3`
+        //   },
+        //   json: true
+        // };
 
-        return rp(imgur_options)
-          .then(function (imgur_response) {
+        // return rp(imgur_options)
+        //   .then(function (imgur_response) {
 
-            // collect image urls from the album
-            var array_images = [];
-            imgur_response.data.forEach(function (item) {
-              array_images.push(item.link);
-            })
+        //     // collect image urls from the album
+        //     var array_images = [];
+        //     imgur_response.data.forEach(function (item) {
+        //       array_images.push(item.link);
+        //     })
 
-            // choose one of images randomly
-            var picUrl = array_images[Math.floor(Math.random() * array_images.length)];
-          })
+        //     // choose one of images randomly
+        //     var picUrl = array_images[Math.floor(Math.random() * array_images.length)];
+        //   })
+
+        var options = {
+          "method": "GET",
+          "hostname": [
+            "api",
+            "imgur",
+            "com"
+          ],
+          "path": [
+            "3",
+            "album",
+            "TeOvP",
+            "images"
+          ],
+          "headers": {
+            "Authorization": "Client-ID 3c3846d8407e6a3"
+          }
+        };
+        
+        var req = http.request(options, function (res) {
+          var chunks = [];
+        
+          res.on("data", function (chunk) {
+            chunks.push(chunk.link);
+          });
+        
+          res.on("end", function () {
+            var picUrl = chunks[Math.floor(Math.random() * chunks.length)];
+            // var body = Buffer.concat(chunks);
+            // console.log(body.toString());
+          });
+        });
+        
+        req.end();
 
       }
       else
