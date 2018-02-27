@@ -50,7 +50,7 @@ function _bot() {
         reType = 'pic';
 
         //測試固定圖址 一定要走HTTPS
-        //picUrl = 'https://i.imgur.com/PVDpNQ8.png'
+        picUrl = 'https://i.imgur.com/PVDpNQ8.png'
 
         // var imgur_options = {
         //   method: 'GET',
