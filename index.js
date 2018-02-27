@@ -51,13 +51,7 @@ function _bot() {
         //測試固定圖址 一定要走HTTPS
         //picUrl = 'https://i.imgur.com/PVDpNQ8.png'
 
-        //search.google('cats', function(err, images) {
-        // array of images
-        //picUrl = images[0]
-        //});
-
         exports.reply = function justReply(req, res) {
-
           var image_options = {
             method: "GET",
             url: "https://api.imgur.com/3/album/jac21120/images",
@@ -165,19 +159,19 @@ function _bot() {
       }
       else if (reType == 'pic') {
         //回傳網址看看
-        // event.reply(picUrl).then(function (data) {
-        //   console.log(picUrl);
-        // }).catch(function (error) {
-        //   console.log('error');
-        // });   
-
-        event.reply({
-          type: 'image',
-          originalContentUrl: picUrl,
-          previewImageUrl: picUrl
+        event.reply(picUrl).then(function (data) {
+          console.log(picUrl);
         }).catch(function (error) {
-          replayText(error.toString());
-        });
+          console.log('error');
+        });   
+
+        // event.reply({
+        //   type: 'image',
+        //   originalContentUrl: picUrl,
+        //   previewImageUrl: picUrl
+        // }).catch(function (error) {
+        //   replayText(error.toString());
+        // });
 
       }
     }
