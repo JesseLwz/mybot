@@ -96,14 +96,14 @@ function _bot() {
           var chunks = [];
         
           res.on("data", function (chunk) {
-            chunks.push(chunk.link);
+            chunks.push(chunk);
           });
         
           res.on("end", function () {
             //picUrl = chunks[Math.floor(Math.random() * chunks.length)];
-             //var body = Buffer.concat(chunks);
+             var body = Buffer.concat(chunks);
              //console.log(body.toString());
-             picUrl = chunks[1];
+             picUrl = body.toString();
           });
         });
         
