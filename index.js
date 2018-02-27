@@ -5,7 +5,7 @@ var getJSON = require('get-json');
 var request = require("request"); //可以想像成就是在後端載入一個網頁
 var cheerio = require("cheerio"); //網頁裡面的 jQuery ( 用法一樣，因為它的核心就是 jQuery )
 
-//var rp = require('request-promise');
+var rp = require('request-promise');
 
 var bot = linebot({
   channelId: 1519666472,
