@@ -49,31 +49,31 @@ function _bot() {
         reType = 'pic';
 
         //測試固定圖址 一定要走HTTPS
-        //picUrl = 'https://i.imgur.com/PVDpNQ8.png'
+        picUrl = 'https://i.imgur.com/PVDpNQ8.png'
 
-        exports.reply = function justReply(req, res) {
-          var image_options = {
-            method: "GET",
-            url: "https://api.imgur.com/3/album/jac21120/images",
-            headers: {
-              "Authorization": 'Client-ID 3c3846d8407e6a3'
-            },
-            json: true
-          };
+        // exports.reply = function justReply(req, res) {
+        //   var image_options = {
+        //     method: "GET",
+        //     url: "https://api.imgur.com/3/album/jac21120/images",
+        //     headers: {
+        //       "Authorization": 'Client-ID 3c3846d8407e6a3'
+        //     },
+        //     json: true
+        //   };
 
-          return rp(imgur_options)
-            .then(function (imgur_response) {
+        //   return rp(imgur_options)
+        //     .then(function (imgur_response) {
 
-              // collect image urls from the album
-              var array_images = [];
-              imgur_response.data.forEach(function (item) {
-                array_images.push(item.link);
-              })
+        //       // collect image urls from the album
+        //       var array_images = [];
+        //       imgur_response.data.forEach(function (item) {
+        //         array_images.push(item.link);
+        //       })
 
-              // choose one of images randomly
-              var picUrl = array_images[Math.floor(Math.random() * array_images.length)];
-            })
-        };
+        //       // choose one of images randomly
+        //       var picUrl = array_images[Math.floor(Math.random() * array_images.length)];
+        //     })
+        // };
       }
       else
         if (msg.indexOf('地點') != -1) {
