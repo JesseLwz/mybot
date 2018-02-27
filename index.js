@@ -74,42 +74,42 @@ function _bot() {
         //     var picUrl = array_images[Math.floor(Math.random() * array_images.length)];
         //   })
 
-        var options = {
-          "method": "GET",
-          "hostname": [
-            "api",
-            "imgur",
-            "com"
-          ],
-          "path": [
-            "3",
-            "album",
-            "TeOvP",
-            "images"
-          ],
-          "headers": {
-            "Authorization": "Client-ID 3c3846d8407e6a3"
-          }
-        };
+        // var options = {
+        //   "method": "GET",
+        //   "hostname": [
+        //     "api",
+        //     "imgur",
+        //     "com"
+        //   ],
+        //   "path": [
+        //     "3",
+        //     "album",
+        //     "TeOvP",
+        //     "images"
+        //   ],
+        //   "headers": {
+        //     "Authorization": "Client-ID 3c3846d8407e6a3"
+        //   }
+        // };
         
-        var req = http.request(options, function (res) {
-          picUrl =  '狀態：'+res.statusCode;
+        // var req = http.request(options, function (res) {
+        //   picUrl =  '狀態：'+res.statusCode;
           
-          var chunks = [];
+        //   var chunks = [];
         
-          res.on("data", function (chunk) {
-            chunks.push(chunk);
-          });
+        //   res.on("data", function (chunk) {
+        //     chunks.push(chunk);
+        //   });
         
-          res.on("end", function () {
-            //picUrl = chunks[Math.floor(Math.random() * chunks.length)];
-             //var body = Buffer.concat(chunks);
-             //console.log(body.toString());
-             //picUrl = body.toString();
-          });
-        });
+        //   res.on("end", function () {
+        //     //picUrl = chunks[Math.floor(Math.random() * chunks.length)];
+        //      //var body = Buffer.concat(chunks);
+        //      //console.log(body.toString());
+        //      //picUrl = body.toString();
+        //   });
+        // });
         
-        req.end();
+        // req.end();
 
       }
       else
