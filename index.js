@@ -20,36 +20,11 @@ var pm = [];  //紀錄地點PM2.5
 var jp; //指定紀錄日圓
 var rateArray = [];//紀錄幣別匯率
 
-var testst = '';
+var imgurl = '';//放圖片網址
 
 _getJSON();
 
 _japan();
-
-
-test();
-
-function test(){
-  var imgur_options = {
-    method: 'GET',
-    uri: `https://api.imgur.com/3/album/TeOvP/images`,
-    headers: {
-      "Authorization": `Client-ID 3c3846d8407e6a3`
-    },
-    json: true
-  };
-
-  return rp(imgur_options)
-    .then(function (imgur_response) {
-      // collect image urls from the album
-      var array_images = [];
-      imgur_response.data.forEach(function (item) {
-        array_images.push(item.link);
-      })
-      // choose one of images randomly
-      testst = array_images[Math.floor(Math.random() * array_images.length)];
-    })
-}
 
 
 _bot();
@@ -77,7 +52,8 @@ function _bot() {
 
         //測試固定圖址 一定要走HTTPS
         //picUrl = 'https://i.imgur.com/PVDpNQ8.png'
-
+        
+        //這邊會有非同步問題? 總之就是沒反應 要把這段包成function 才會依序執行出結果 參照地精
         var imgur_options = {
           method: 'GET',
           uri: `https://api.imgur.com/3/album/TeOvP/images`,
@@ -100,16 +76,10 @@ function _bot() {
 
       }
       else if (msg.indexOf('地精') == 0) {
-        //const promise = new Promise((resolve, reject) => { 
-          test(); 
-        //})
-        //promise.then((value) => {
+          getImgurImg(); 
           reType = 'pic';
-          picUrl = testst;
-        //})
+          picUrl = imgurl;
       }
-
-
       else
         if (msg.indexOf('地點') != -1) {
           pm.forEach(function (e, i) {
@@ -262,3 +232,24 @@ function _japan() {
 }
 
 
+function getImgurImg(){
+  var imgur_options = {
+    method: 'GET',
+    uri: `https://api.imgur.com/3/album/TeOvP/images`,
+    headers: {
+      "Authorization": `Client-ID 3c3846d8407e6a3`
+    },
+    json: true
+  };
+
+  return rp(imgur_options)
+    .then(function (imgur_response) {
+      // collect image urls from the album
+      var array_images = [];
+      imgur_response.data.forEach(function (item) {
+        array_images.push(item.link);
+      })
+      // choose one of images randomly
+      imgurl = array_images[Math.floor(Math.random() * array_images.length)];
+    })
+}
