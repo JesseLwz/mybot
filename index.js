@@ -159,19 +159,19 @@ function _bot() {
       }
       else if (reType == 'pic') {
         //回傳網址看看
-        // event.reply(picUrl).then(function (data) {
-        //   console.log(picUrl);
-        // }).catch(function (error) {
-        //   console.log('error');
-        // });   
-
-        event.reply({
-          type: 'image',
-          originalContentUrl: picUrl,
-          previewImageUrl: picUrl
+        event.reply(picUrl).then(function (data) {
+          console.log(picUrl);
         }).catch(function (error) {
-          replayText(error.toString());
-        });
+          console.log('error');
+        });   
+
+        // event.reply({
+        //   type: 'image',
+        //   originalContentUrl: picUrl,
+        //   previewImageUrl: picUrl
+        // }).catch(function (error) {
+        //   replayText(error.toString());
+        // });
 
       }
     }
