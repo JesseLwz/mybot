@@ -10,8 +10,8 @@ var http = require("https");
 
 var bot = linebot({
   channelId: 1519666472,
-  channelSecret: 'a636c7b132faae8e4105aca68e9c6082',
-  channelAccessToken: 'SVXCMSo50NBIfXdzLpsVPDTNwJd9boEZSPM8bfRG/WPHZv9AEJE2W2mcx5OBOujFVv7gCLiLF0fkh2nKkmPKriRhYBZL7MJy4LYD3JNF6ZQarbTB7s9AM4i84Os7os9IeWupoFEA9a/YH6o0DSoZfgdB04t89/1O/w1cDnyilFU='
+  channelSecret: process.env.ChannelSecret,//'a636c7b132faae8e4105aca68e9c6082',
+  channelAccessToken: process.env.ChannelAccessToken//'SVXCMSo50NBIfXdzLpsVPDTNwJd9boEZSPM8bfRG/WPHZv9AEJE2W2mcx5OBOujFVv7gCLiLF0fkh2nKkmPKriRhYBZL7MJy4LYD3JNF6ZQarbTB7s9AM4i84Os7os9IeWupoFEA9a/YH6o0DSoZfgdB04t89/1O/w1cDnyilFU='
 });
 
 var timer;
@@ -97,43 +97,6 @@ function _bot() {
             // choose one of images randomly
             picUrl = array_images[Math.floor(Math.random() * array_images.length)];
           })
-
-        // var options = {
-        //   "method": "GET",
-        //   "hostname": [
-        //     "api",
-        //     "imgur",
-        //     "com"
-        //   ],
-        //   "path": [
-        //     "3",
-        //     "album",
-        //     "TeOvP",
-        //     "images"
-        //   ],
-        //   "headers": {
-        //     "Authorization": "Client-ID 3c3846d8407e6a3"
-        //   }
-        // };
-        
-        // var req = http.request(options, function (res) {
-        //   picUrl =  '狀態：'+res.statusCode;
-          
-        //   var chunks = [];
-        
-        //   res.on("data", function (chunk) {
-        //     chunks.push(chunk);
-        //   });
-        
-        //   res.on("end", function () {
-        //     //picUrl = chunks[Math.floor(Math.random() * chunks.length)];
-        //      //var body = Buffer.concat(chunks);
-        //      //console.log(body.toString());
-        //      //picUrl = body.toString();
-        //   });
-        // });
-        
-        // req.end();
 
       }
       else if(msg.indexOf('地精') == 0){
