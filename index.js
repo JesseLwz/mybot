@@ -93,6 +93,8 @@ function _bot() {
         };
         
         var req = http.request(options, function (res) {
+          picUrl =  '狀態：'+res.statusCode;
+          
           var chunks = [];
         
           res.on("data", function (chunk) {
@@ -101,9 +103,9 @@ function _bot() {
         
           res.on("end", function () {
             //picUrl = chunks[Math.floor(Math.random() * chunks.length)];
-             var body = Buffer.concat(chunks);
+             //var body = Buffer.concat(chunks);
              //console.log(body.toString());
-             picUrl = body.toString();
+             //picUrl = body.toString();
           });
         });
         
