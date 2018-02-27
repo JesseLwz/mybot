@@ -54,7 +54,7 @@ function _bot() {
 
         var image_options = {
           method: "GET",
-          url: "https://api.imgur.com/3/album/TeOvP/images",
+          uri: "https://api.imgur.com/3/album/TeOvP/images",
           headers: {
             "Authorization": 'Client-ID 3c3846d8407e6a3'
           },
