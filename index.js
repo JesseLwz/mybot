@@ -100,14 +100,13 @@ function _bot() {
 
       }
       else if (msg.indexOf('地精') == 0) {
-
-        const promise = new Promise((resolve, reject) => { test(); })
-
-        promise.then((value) => {
+        //const promise = new Promise((resolve, reject) => { 
+          test(); 
+        //})
+        //promise.then((value) => {
           reType = 'pic';
           picUrl = testst;
-        })
-
+        //})
       }
 
 
