@@ -51,15 +51,14 @@ function _bot() {
         //測試固定圖址 一定要走HTTPS
         //picUrl = 'https://i.imgur.com/PVDpNQ8.png'
 
-
-        var image_options = {
-          method: "GET",
-          uri: "https://api.imgur.com/3/album/TeOvP/images",
+        var imgur_options = {
+          method: 'GET',
+          uri: `https://api.imgur.com/3/album/TeOvP/images`,
           headers: {
-            "Authorization": 'Client-ID 3c3846d8407e6a3'
+            "Authorization": `Client-ID 3c3846d8407e6a3`
           },
           json: true
-        };
+      };
 
         return rp(imgur_options)
           .then(function (imgur_response) {
