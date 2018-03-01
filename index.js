@@ -4,9 +4,8 @@ var express = require('express');
 var getJSON = require('get-json');
 var request = require("request"); //可以想像成就是在後端載入一個網頁
 var cheerio = require("cheerio"); //網頁裡面的 jQuery ( 用法一樣，因為它的核心就是 jQuery )
-
 var rp = require('request-promise');
-var http = require("https");
+//var http = require("https");
 
 var bot = linebot({
   channelId: 1519666472,
@@ -44,41 +43,48 @@ function _bot() {
       var msg = event.message.text;
       var replyMsg = '';
 
-      var reType = 'text';
-      var picUrl = '';
+      var reType = 'text'; //回傳格式: text  pic
+      var picUrl = ''; //回傳圖片的URL
 
       if (msg.indexOf('梗圖') == 0) {
         reType = 'pic';
 
-        //測試固定圖址 一定要走HTTPS
-        //picUrl = 'https://i.imgur.com/PVDpNQ8.png'
-        
-        //這邊會有非同步問題? 總之就是沒反應 要把這段包成function 才會依序執行出結果 參照地精
-        var imgur_options = {
-          method: 'GET',
-          uri: `https://api.imgur.com/3/album/TeOvP/images`,
-          headers: {
-            "Authorization": `Client-ID 3c3846d8407e6a3`
-          },
-          json: true
-        };
 
-        return rp(imgur_options)
-          .then(function (imgur_response) {
-            // collect image urls from the album
-            var array_images = [];
-            imgur_response.data.forEach(function (item) {
-              array_images.push(item.link);
+        var getImgurImg2 = new Promise(function (resolve, reject) {
+          
+          var imgurl2=''
+          var imgur_options = {
+            method: 'GET',
+            uri: `https://api.imgur.com/3/album/TeOvP/images`,
+            headers: {
+              "Authorization": `Client-ID 3c3846d8407e6a3`
+            },
+            json: true
+          };
+        
+          return rp(imgur_options)
+            .then(function (imgur_response) {
+              // collect image urls from the album
+              var array_images = [];
+              imgur_response.data.forEach(function (item) {
+                array_images.push(item.link);
+              })
+              // choose one of images randomly
+              imgurl2 = array_images[Math.floor(Math.random() * array_images.length)];
             })
-            // choose one of images randomly
-            picUrl = array_images[Math.floor(Math.random() * array_images.length)];
-          })
+            resolve(imgurl2)         
+        });
+
+        getImgurImg2.then(function (returnValue) {
+          picUrl = returnValue;
+        });
 
       }
       else if (msg.indexOf('地精') == 0) {
-          getImgurImg(); 
-          reType = 'pic';
-          picUrl = imgurl;
+        //還是有問題 第一次好像沒有執行 
+        getImgurImg(); //去呼叫 Imgur API 抓相簿圖片
+        reType = 'pic';
+        picUrl = imgurl;
       }
       else
         if (msg.indexOf('地點') != -1) {
@@ -232,7 +238,7 @@ function _japan() {
 }
 
 
-function getImgurImg(){
+function getImgurImg() {
   var imgur_options = {
     method: 'GET',
     uri: `https://api.imgur.com/3/album/TeOvP/images`,
