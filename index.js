@@ -9,7 +9,7 @@ var rp = require('request-promise');
 
 var bot = linebot({
   channelId: 1519666472,
-  channelSecret: process.env.ChannelSecret,//'a636c7b132faae8e4105aca68e9c6082', 這邊使用
+  channelSecret: process.env.ChannelSecret,//'a636c7b132faae8e4105aca68e9c6082', 這邊使用HEROKU的環境變數
   channelAccessToken: process.env.ChannelAccessToken//'SVXCMSo50NBIfXdzLpsVPDTNwJd9boEZSPM8bfRG/WPHZv9AEJE2W2mcx5OBOujFVv7gCLiLF0fkh2nKkmPKriRhYBZL7MJy4LYD3JNF6ZQarbTB7s9AM4i84Os7os9IeWupoFEA9a/YH6o0DSoZfgdB04t89/1O/w1cDnyilFU='
 });
 
@@ -48,36 +48,9 @@ function _bot() {
 
       if (msg.indexOf('梗圖') == 0) {
         reType = 'pic';
-
-        const getImgurImg2 = new Promise(function (resolve, reject) {
-          
-          var imgurl2=''
-          var imgur_options = {
-            method: 'GET',
-            uri: `https://api.imgur.com/3/album/TeOvP/images`,
-            headers: {
-              "Authorization": `Client-ID 3c3846d8407e6a3`
-            },
-            json: true
-          };
-        
-          return rp(imgur_options)
-            .then(function (imgur_response) {
-              // collect image urls from the album
-              var array_images = [];
-              imgur_response.data.forEach(function (item) {
-                array_images.push(item.link);
-              })
-              // choose one of images randomly
-              imgurl2 = array_images[Math.floor(Math.random() * array_images.length)];
-            })
-            resolve(imgurl2)         
-        });
-
-        getImgurImg2.then(function (returnValue) {
-          picUrl = returnValue;
-        });
-
+        var keyword = msg.substring(2)
+        searchImgurImg(keyword);
+        picUrl = imgurl;
       }
       else if (msg.indexOf('地精') == 0) {
         //還是有問題 第一次好像沒有執行 
@@ -258,6 +231,28 @@ function getImgurImg() {
     // collect image urls from the album
     var array_images = [];
     imgur_response.data.forEach(function (item) {
+      array_images.push(item.link);
+    })
+    // choose one of images randomly
+    imgurl = array_images[Math.floor(Math.random() * array_images.length)];
+  })
+}
+
+function searchImgurImg(_keyword){
+  var imgur_options = {
+    method: 'GET',
+    uri: `https://api.imgur.com/3/gallery/search/?q=`+_keyword,
+    headers: {
+      "Authorization": `Client-ID 3c3846d8407e6a3`
+    },
+    json: true
+  };
+
+  return rp(imgur_options)
+  .then(function (imgur_response) {
+    // collect image urls from the album
+    var array_images = [];
+    imgur_response.data[0].forEach(function (item) {
       array_images.push(item.link);
     })
     // choose one of images randomly
