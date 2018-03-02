@@ -49,7 +49,6 @@ function _bot() {
       if (msg.indexOf('梗圖') == 0) {
         reType = 'pic';
 
-
         var getImgurImg2 = new Promise(function (resolve, reject) {
           
           var imgurl2=''
@@ -83,8 +82,14 @@ function _bot() {
       else if (msg.indexOf('地精') == 0) {
         //還是有問題 第一次好像沒有執行 
         getImgurImg(); //去呼叫 Imgur API 抓相簿圖片
-        reType = 'pic';
-        picUrl = imgurl;
+        if (imgurl = !'') {
+          reType = 'pic';
+          picUrl = imgurl;
+        }
+        else {
+          replyMsg = '沒有梗圖...'
+        }        
+
       }
       else
         if (msg.indexOf('地點') != -1) {
