@@ -250,12 +250,8 @@ function searchImgurImg(_keyword){
 
   return rp(imgur_options)
   .then(function (imgur_response) {
-    // collect image urls from the album
-    var array_images = [];
-    imgur_response.data[0].forEach(function (item) {
-      array_images.push(item.link);
-    })
-    // choose one of images randomly
-    imgurl = array_images[Math.floor(Math.random() * array_images.length)];
+
+    imgurl = imgur_response.data[0].images[0].link
+    
   })
 }
