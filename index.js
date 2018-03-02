@@ -82,13 +82,13 @@ function _bot() {
       else if (msg.indexOf('地精') == 0) {
         //還是有問題 第一次好像沒有執行 
         getImgurImg(); //去呼叫 Imgur API 抓相簿圖片
-        if (imgurl = !'') {
+        //if (imgurl = !'') {
           reType = 'pic';
           picUrl = imgurl;
-        }
-        else {
-          replyMsg = '沒有梗圖...'
-        }        
+        //}
+        //else {
+        //  replyMsg = '沒有梗圖...'
+        //}        
 
       }
       else
