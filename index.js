@@ -9,7 +9,7 @@ var rp = require('request-promise');
 
 var bot = linebot({
   channelId: 1519666472,
-  channelSecret: process.env.ChannelSecret,//'a636c7b132faae8e4105aca68e9c6082',
+  channelSecret: process.env.ChannelSecret,//'a636c7b132faae8e4105aca68e9c6082', 這邊使用
   channelAccessToken: process.env.ChannelAccessToken//'SVXCMSo50NBIfXdzLpsVPDTNwJd9boEZSPM8bfRG/WPHZv9AEJE2W2mcx5OBOujFVv7gCLiLF0fkh2nKkmPKriRhYBZL7MJy4LYD3JNF6ZQarbTB7s9AM4i84Os7os9IeWupoFEA9a/YH6o0DSoZfgdB04t89/1O/w1cDnyilFU='
 });
 
@@ -21,9 +21,9 @@ var rateArray = [];//紀錄幣別匯率
 
 var imgurl = '';//放圖片網址
 
-_getJSON();
+_getPMJSON();
 
-_japan();
+_watchJapan();//定時監控日幣匯率
 
 
 _bot();
@@ -49,7 +49,7 @@ function _bot() {
       if (msg.indexOf('梗圖') == 0) {
         reType = 'pic';
 
-        var getImgurImg2 = new Promise(function (resolve, reject) {
+        const getImgurImg2 = new Promise(function (resolve, reject) {
           
           var imgurl2=''
           var imgur_options = {
@@ -195,7 +195,7 @@ function _bot() {
 }
 
 
-function _getJSON() {
+function _getPMJSON() {
   clearTimeout(timer);
   getJSON('http://opendata2.epa.gov.tw/AQX.json', function (error, response) {
     response.forEach(function (e, i) {
@@ -205,10 +205,10 @@ function _getJSON() {
       pm[i][2] = e.PM10 * 1;
     });
   });
-  timer = setInterval(_getJSON, 3600000); //每小時抓取一次新資料
+  timer = setInterval(_getPMJSON, 3600000); //每小時抓取一次新資料
 }
 
-function _japan() {
+function _watchJapan() {
   clearTimeout(timer2);
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
@@ -237,7 +237,7 @@ function _japan() {
       if (jp < 0.273) {
         bot.push('U967cd37216aad96584958423f28e92cc', '現在日幣 ' + jp + '，該買啦！');
       }
-      timer2 = setInterval(_japan, 1800000);//每半小時抓取一次新資料
+      timer2 = setInterval(_watchJapan, 1800000);//每半小時抓取一次新資料
     }
   });
 }
@@ -254,13 +254,13 @@ function getImgurImg() {
   };
 
   return rp(imgur_options)
-    .then(function (imgur_response) {
-      // collect image urls from the album
-      var array_images = [];
-      imgur_response.data.forEach(function (item) {
-        array_images.push(item.link);
-      })
-      // choose one of images randomly
-      imgurl = array_images[Math.floor(Math.random() * array_images.length)];
+  .then(function (imgur_response) {
+    // collect image urls from the album
+    var array_images = [];
+    imgur_response.data.forEach(function (item) {
+      array_images.push(item.link);
     })
+    // choose one of images randomly
+    imgurl = array_images[Math.floor(Math.random() * array_images.length)];
+  })
 }
