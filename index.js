@@ -219,7 +219,7 @@ function _watchJapan() {
 function getImgurImg() {
   var imgur_options = {
     method: 'GET',
-    uri: `https://api.imgur.com/3/album/TeOvP/images`,
+    uri: `https://api.imgur.com/3/album/ZTx3D/images`,
     headers: {
       "Authorization": `Client-ID 3c3846d8407e6a3`
     },
