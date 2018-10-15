@@ -91,7 +91,10 @@ function _bot() {
           }
         }
         else if (msg.indexOf('日幣') != -1) {
-          replyMsg = '目前日幣 ' + jp;
+          if (jp != 'undefined')
+            replyMsg = '目前日幣 ' + jp;
+          else
+            replyMsg = '爬蟲中...';
         }
         else if (msg.indexOf('測試') != -1) {
           if (rateArray.length < 1)
