@@ -52,14 +52,33 @@ function _bot() {
         picUrl = imgurl;
       } else if (msg.indexOf('地精') == 0) {
         //還是有問題 第一次好像沒有執行 
-        getImgurImg(); //去呼叫 Imgur API 抓相簿圖片
+    //    getImgurImg(); //去呼叫 Imgur API 抓相簿圖片
         //if (imgurl = !'') {
         reType = 'pic';
-        picUrl = imgurl;
+    //    picUrl = imgurl;
         //}
         //else {
         //  replyMsg = '沒有梗圖...'
         //}        
+        var imgur_options = {
+          method: 'GET',
+          uri: `https://api.imgur.com/3/album/ZTx3D/images`,
+          headers: {
+            "Authorization": `Client-ID 3c3846d8407e6a3`
+          },
+          json: true
+        };
+      
+        rp(imgur_options)
+          .then(function (imgur_response) {
+            // collect image urls from the album
+            var array_images = [];
+            imgur_response.data.forEach(function (item) {
+              array_images.push(item.link);
+            })
+            // choose one of images randomly
+            picUrl = array_images[Math.floor(Math.random() * array_images.length)];
+          })
 
       } else
       if (msg.indexOf('地點') != -1) {
